@@ -12,6 +12,9 @@ module.exports = {
     parserOptions:{
         ecmaVersion: 2020
     },
+    rules:{
+        'no-used-vars':'error'
+    },
     plugins: [
         'jest',
         'jest-formatting',

@@ -76,3 +76,6 @@ A.  As per me, unit test should present along with the code file and also I will
 - What you will do for api testing?
 A.  I will use cypress
 
+Known Issue:
+
+Lint script is not working as expected
