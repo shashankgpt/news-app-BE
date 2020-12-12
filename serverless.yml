@@ -34,11 +34,19 @@ provider:
       Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
 
 functions:
-  create:
-    handler: src/api/create.create
+  signup:
+    handler: src/api/user.signup
     events:
       - http:
-          path: /v1/user/create
+          path: /v1/public/signup
+          method: post
+          cors: true
+          
+  login:
+    handler: src/api/user.login
+    events:
+      - http:
+          path: /v1/public/login
           method: post
           cors: true
 
