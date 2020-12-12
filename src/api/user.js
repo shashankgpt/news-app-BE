@@ -43,6 +43,7 @@ module.exports.signup = async (event) => {
 
 module.exports.login = async (event) => {
   try {
+    var test ='123';
     const data = JSON.parse(event.body);
     // TODO: ADD more validations
     if (

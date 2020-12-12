@@ -1,0 +1,220 @@
+{
+	"info": {
+		"_postman_id": "fc6bc966-0f99-4323-a6f2-94af0af465e8",
+		"name": "new app",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Sign Up",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"test\",\r\n    \"password\":\"test\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/v1/public/signup",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"v1",
+						"public",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"test\",\r\n    \"password\":\"test\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/v1/public/login",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"v1",
+						"public",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update profile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MDc3NzY0NzQsImRhdGEiOnsidXNlcm5hbWUiOiJ0ZXN0In0sImlhdCI6MTYwNzc3Mjg3NH0.3bLhEmcNSv7K0T8F2U78SefuUKN_pFsvVMxNMLy3yfw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"firstName\": \"shankyq\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/v1/profile",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"v1",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get profile",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MDc3NzY0NzQsImRhdGEiOnsidXNlcm5hbWUiOiJ0ZXN0In0sImlhdCI6MTYwNzc3Mjg3NH0.3bLhEmcNSv7K0T8F2U78SefuUKN_pFsvVMxNMLy3yfw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"firstName\": \"shanky\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/v1/profile",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"v1",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "save Favorite",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MDc3NzY0NzQsImRhdGEiOnsidXNlcm5hbWUiOiJ0ZXN0In0sImlhdCI6MTYwNzc3Mjg3NH0.3bLhEmcNSv7K0T8F2U78SefuUKN_pFsvVMxNMLy3yfw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"newsId\":\"test2\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/v1/favorite",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"v1",
+						"favorite"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Favorite",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MDc3NzY0NzQsImRhdGEiOnsidXNlcm5hbWUiOiJ0ZXN0In0sImlhdCI6MTYwNzc3Mjg3NH0.3bLhEmcNSv7K0T8F2U78SefuUKN_pFsvVMxNMLy3yfw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"newsId\":\"test\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/v1/favorite",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"v1",
+						"favorite"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
