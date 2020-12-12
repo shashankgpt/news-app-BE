@@ -12,8 +12,6 @@ async function createFavorite(username,event) {
         updatedAt: timestamp,
       },
     };
-    console.log("fav");
-  console.log(params)
     const resp = await dynamodb.put(params).promise();
     return resp;
   }

@@ -6,20 +6,8 @@ const { getUser } = require("../helper/users.helper");
 
 module.exports.updateProfile = async (event) => {
   try {
-    const data = JSON.parse(event.body);
-    // TODO: ADD more validations
-    // if (
-    //   typeof data.username !== "string" ||
-    //   typeof data.password !== "string"
-    // ) {
-    //   console.error("Validation Failed");
-    //   return errorReponse(
-    //     event.requestContext.requestId,
-    //     400,
-    //     "Unable to create user."
-    //   );
-    // }
-    const user = await getUser("test");
+    const username = event.requestContext.authorizer.principalId;
+    const user = await getUser(username);
     console.log(user);
     console.log("hello");
     if (Object.keys(user).length < 1)
@@ -29,7 +17,7 @@ module.exports.updateProfile = async (event) => {
         "No Data Found"
       );
 
-    const profile = await updateProfile("test", event);
+    const profile = await updateProfile(username, event);
     if (Object.keys(user).length < 0)
       return errorReponse(
         event.requestContext.requestId,
@@ -50,7 +38,8 @@ module.exports.updateProfile = async (event) => {
 
 module.exports.getProfile = async (event) => {
   try {
-    const user = await getUser("test");
+    const username = event.requestContext.authorizer.principalId;
+    const user = await getUser(username);
     console.log(user);
     console.log("hello");
     if (Object.keys(user).length < 1)
@@ -60,7 +49,7 @@ module.exports.getProfile = async (event) => {
         "No Data Found"
       );
 
-    const profile = await getProfile("test");
+    const profile = await getProfile(username);
     if (Object.keys(user).length < 0)
       return errorReponse(
         event.requestContext.requestId,

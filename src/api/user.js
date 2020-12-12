@@ -1,5 +1,5 @@
 "use strict";
-var jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 const { errorReponse, successReponse } = require("../services/responses");
 const { createUser, getUser, verifyUser } = require("../helper/users.helper");
 const { createProfile } = require("../helper/profile.helper");

@@ -38,6 +38,9 @@ provider:
         - "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE_PROFILE}"
 
 functions:
+  auth:
+    handler: src/services/auth.authorize
+  
   signup:
     handler: src/api/user.signup
     events:
@@ -59,6 +62,7 @@ functions:
     events:
       - http:
           path: /v1/profile
+          authorizer: auth
           method: post
           cors: true
           
@@ -67,6 +71,7 @@ functions:
     events:
       - http:
           path: /v1/profile
+          authorizer: auth
           method: get
           cors: true
 
@@ -75,6 +80,7 @@ functions:
     events:
       - http:
           path: /v1/favorite
+          authorizer: auth
           method: post
           cors: true
 
@@ -83,6 +89,7 @@ functions:
     events:
       - http:
           path: /v1/favorite
+          authorizer: auth
           method: get
           cors: true
           
@@ -91,6 +98,7 @@ functions:
     events:
       - http:
           path: /v1/favorite
+          authorizer: auth
           method: delete
           cors: true
 

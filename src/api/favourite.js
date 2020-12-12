@@ -5,7 +5,8 @@ const { createFavorite, deleteFavorite, getFavForUser } = require("../helper/fav
 
 module.exports.createFavorite = async (event) => {
   try {
-    const profile = await createFavorite("test", event);
+    const username = event.requestContext.authorizer.principalId;
+    const profile = await createFavorite(username, event);
     return successReponse(200, profile, "Favorite is updated.");
   } catch (err) {
     console.log(err);
@@ -19,7 +20,8 @@ module.exports.createFavorite = async (event) => {
 
 module.exports.deleteFavourite = async (event) => {
   try {
-    await deleteFavorite("test", event);
+    const username = event.requestContext.authorizer.principalId;
+    await deleteFavorite(username, event);
     return successReponse(200, {}, "Favorite is deleted.");
   } catch (err) {
     console.log(err);
@@ -33,7 +35,8 @@ module.exports.deleteFavourite = async (event) => {
 
 module.exports.getAllFavByUser = async (event) => {
     try {
-       const data =  await getFavForUser("test");
+        const username = event.requestContext.authorizer.principalId;
+       const data =  await getFavForUser(username);
         return successReponse(200, data, "Favorite is fetched.");
     } catch (err) {
       console.log(err);
