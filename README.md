@@ -1,15 +1,4 @@
-<!--
-title: 'AWS Serverless REST API with DynamoDB and offline support example in NodeJS'
-description: 'This example demonstrates how to run a service locally, using the ''serverless-offline'' plugin. It provides a REST API to manage Todos stored in DynamoDB.'
-layout: Doc
-framework: v1
-platform: AWS
-language: nodeJS
-authorLink: 'https://github.com/adambrgmn'
-authorName: 'Adam Bergman'
-authorAvatar: 'https://avatars1.githubusercontent.com/u/13746650?v=4&s=140'
--->
-# Serverless REST API with DynamoDB and offline support
+# News App Backend
 
 This example demonstrates how to run a service locally, using the
 [serverless-offline](https://github.com/dherault/serverless-offline) plugin. It
@@ -22,6 +11,24 @@ plugin.
 ## Use-case
 
 Test your service locally, without having to deploy it first.
+
+## Configure Credential
+Linux:
+export AWS_ACCESS_KEY_ID=<KEY_ID>
+export AWS_SECRET_ACCESS_KEY=<ACCESS_KEY>
+
+windows(powershell):
+setx AWS_ACCESS_KEY_ID <KEY_ID>
+setx AWS_SECRET_ACCESS_KEY <ACCESS_KEY>
+
+serverless config credentials --provider aws --key <KEY> --secret <secret>
+
+```bash
+npm install
+serverless dynamodb install
+serverless offline start
+serverless dynamodb migrate (this imports schema)
+```
 
 ## Setup
 
@@ -42,57 +49,30 @@ serverless offline start
 
 You can create, retrieve, update, or delete todos with the following commands:
 
-### Create a Todo
 
-```bash
-curl -X POST -H "Content-Type:application/json" http://localhost:3000/todos --data '{ "text": "Learn Serverless" }'
-```
+## FAQ
 
-Example Result:
-```bash
-{"text":"Learn Serverless","id":"ee6490d0-aa11e6-9ede-afdfa051af86","createdAt":1479138570824,"checked":false,"updatedAt":1479138570824}%
-```
+- Did you use any bootstrap template?
+A.  Yes, I have used serverless framework examples
 
-### List all Todos
+- Do we have linting ?
+A.  Yes, Airbnb style guide. Moreover we can have husky And/or sonarqube
 
-```bash
-curl -H "Content-Type:application/json" http://localhost:3000/todos
-```
+- Do we test setup ?
+A.  No, It will add jest framework for testing
 
-Example output:
-```bash
-[{"text":"Deploy my first service","id":"ac90feaa11e6-9ede-afdfa051af86","checked":true,"updatedAt":1479139961304},{"text":"Learn Serverless","id":"206793aa11e6-9ede-afdfa051af86","createdAt":1479139943241,"checked":false,"updatedAt":1479139943241}]%
-```
+- why serverless ?
+A.  Matches with the JD and currently working on same. It is cloud agonistic unlike AWS SAM
 
-### Get one Todo
+- should we keep test files along with code js files or we should create a separate directory structure?
+A.  As per me, unit test should present along with the code file
 
-```bash
-# Replace the <id> part with a real id from your todos table
-curl -H "Content-Type:application/json" http://localhost:3000/todos/<id>
-```
+- Will you keep database schema and api function in same yml file
+A.  A Big NO, because database will deployed once. So I will keep infrastrcture like dynamodb and DAX in their separate files.
 
-Example Result:
-```bash
-{"text":"Learn Serverless","id":"ee6490d0-aa11e6-9ede-afdfa051af86","createdAt":1479138570824,"checked":false,"updatedAt":1479138570824}%
-```
+- should we keep test files along with code js files or we should create a separate directory structure?
+A.  As per me, unit test should present along with the code file and also I will add a folder called __test__ to add postman files and environment for other users and help in creating  cypress test cases.
 
-### Update a Todo
+- What you will do for api testing?
+A.  I will use cypress
 
-```bash
-# Replace the <id> part with a real id from your todos table
-curl -X PUT -H "Content-Type:application/json" http://localhost:3000/todos/<id> --data '{ "text": "Learn Serverless", "checked": true }'
-```
-
-Example Result:
-```bash
-{"text":"Learn Serverless","id":"ee6490d0-aa11e6-9ede-afdfa051af86","createdAt":1479138570824,"checked":true,"updatedAt":1479138570824}%
-```
-
-### Delete a Todo
-
-```bash
-# Replace the <id> part with a real id from your todos table
-curl -X DELETE -H "Content-Type:application/json" http://localhost:3000/todos/<id>
-```
-
-No output
