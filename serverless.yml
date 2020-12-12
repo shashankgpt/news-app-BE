@@ -21,7 +21,8 @@ provider:
   name: aws
   runtime: nodejs12.x
   environment:
-    DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
+    DYNAMODB_TABLE_USER: ${self:service}-user-${opt:stage, self:provider.stage}
+    DYNAMODB_TABLE_PROFILE: ${self:service}-profile-${opt:stage, self:provider.stage}
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -31,7 +32,9 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
-      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
+      Resource: 
+        - "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE_USER}"
+        - "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE_PROFILE}"
 
 functions:
   signup:
@@ -49,6 +52,25 @@ functions:
           path: /v1/public/login
           method: post
           cors: true
+
+  updateProfile:
+    handler: src/api/profile.updateProfile
+    events:
+      - http:
+          path: /v1/updateProfile
+          method: post
+          cors: true
+          
+  getProfile:
+    handler: src/api/profile.getProfile
+    events:
+      - http:
+          path: /v1/getProfile
+          method: get
+          cors: true
+  
+  
+  
 
   list:
     handler: src/api/list.list
@@ -95,4 +117,17 @@ resources:
           - AttributeName: username
             KeyType: HASH
         BillingMode: PAY_PER_REQUEST
-        TableName: ${self:provider.environment.DYNAMODB_TABLE}
+        TableName: ${self:provider.environment.DYNAMODB_TABLE_USER}
+    
+    ProfileDynamoDbTable:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: username
+            AttributeType: S
+        KeySchema:
+          - AttributeName: username
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+        TableName: ${self:provider.environment.DYNAMODB_TABLE_PROFILE}

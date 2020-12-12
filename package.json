@@ -6,6 +6,7 @@
   "author": "Christoph Gysin <christoph.gysin@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "jsonwebtoken": "^8.5.1",
     "password-hash": "^1.2.2",
     "uuid": "^2.0.3"
   },
