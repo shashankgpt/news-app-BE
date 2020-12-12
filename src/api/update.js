@@ -1,6 +1,6 @@
 'use strict';
 
-const dynamodb = require('./dynamodb');
+const dynamodb = require('../services/dynamodb');
 
 module.exports.update = (event, context, callback) => {
   const timestamp = new Date().getTime();

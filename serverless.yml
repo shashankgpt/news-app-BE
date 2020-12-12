@@ -1,4 +1,4 @@
-service: aws-node-rest-api-with-dynamodb-and-offline
+service: aws-node-rest-api-with-dynamodb-and-offline-news
 
 frameworkVersion: ">=1.1.0 <2.0.0"
 
@@ -35,15 +35,15 @@ provider:
 
 functions:
   create:
-    handler: todos/create.create
+    handler: src/api/create.create
     events:
       - http:
-          path: todos
+          path: /v1/user/create
           method: post
           cors: true
 
   list:
-    handler: todos/list.list
+    handler: src/api/list.list
     events:
       - http:
           path: todos
@@ -51,7 +51,7 @@ functions:
           cors: true
 
   get:
-    handler: todos/get.get
+    handler: src/api/get.get
     events:
       - http:
           path: todos/{id}
@@ -59,7 +59,7 @@ functions:
           cors: true
 
   update:
-    handler: todos/update.update
+    handler: src/api/update.update
     events:
       - http:
           path: todos/{id}
@@ -67,7 +67,7 @@ functions:
           cors: true
 
   delete:
-    handler: todos/delete.delete
+    handler: src/api/delete.delete
     events:
       - http:
           path: todos/{id}
@@ -76,15 +76,15 @@ functions:
 
 resources:
   Resources:
-    TodosDynamoDbTable:
+    UserDynamoDbTable:
       Type: 'AWS::DynamoDB::Table'
       DeletionPolicy: Retain
       Properties:
         AttributeDefinitions:
-          - AttributeName: id
+          - AttributeName: username
             AttributeType: S
         KeySchema:
-          - AttributeName: id
+          - AttributeName: username
             KeyType: HASH
         BillingMode: PAY_PER_REQUEST
         TableName: ${self:provider.environment.DYNAMODB_TABLE}
