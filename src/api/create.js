@@ -1,6 +1,6 @@
 "use strict";
 
-const { errorReponse } = require("../services/responses");
+const { errorReponse, successReponse } = require("../services/responses");
 const { createUser } = require("../helper/users.helper");
 
 module.exports.create = async (event) => {
@@ -17,7 +17,8 @@ module.exports.create = async (event) => {
         "Unable to create user."
       );
     }
-    return await createUser(event);
+    await createUser(event);
+    return successReponse(201,{username: data.username}, 'User is created.')
   } catch (err) {
     console.log(err);
     return errorReponse(

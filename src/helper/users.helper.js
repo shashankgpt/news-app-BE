@@ -3,7 +3,6 @@ const passwordHash = require("password-hash");
 const { errorReponse, successReponse } = require("../services/responses");
 
 async function createUser(event) {
-  try {
     const data = JSON.parse(event.body);
     const timestamp = new Date().getTime();
     const params = {
@@ -16,19 +15,8 @@ async function createUser(event) {
       },
     };
 
-    await dynamodb.put(params).promise();
-    return successReponse(
-      201,
-      { userId: params.Item.id, username: params.Item.username },
-      "User is created"
-    );
-  } catch (err) {
-    return errorReponse(
-      event.requestContext.requestId,
-      501,
-      "Unable to create user"
-    );
-  }
+    const resp = await dynamodb.put(params).promise();
+    return resp;
 }
 
 module.exports = {
