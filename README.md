@@ -59,7 +59,7 @@ A.  Yes, I have used serverless framework examples
 A.  Yes, Airbnb style guide. Moreover we can have husky And/or sonarqube
 
 - Do we test setup ?
-A.  No, It will add jest framework for testing
+A.  yes, using jest
 
 - why serverless ?
 A.  Matches with the JD and currently working on same. It is cloud agonistic unlike AWS SAM

@@ -8,8 +8,6 @@ module.exports.updateProfile = async (event) => {
   try {
     const username = event.requestContext.authorizer.principalId;
     const user = await getUser(username);
-    console.log(user);
-    console.log("hello");
     if (Object.keys(user).length < 1)
       return errorReponse(
         event.requestContext.requestId,

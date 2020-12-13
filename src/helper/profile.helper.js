@@ -28,10 +28,10 @@ async function createProfile(event) {
       Key: {
           username
       }, 
-      UpdateExpression: "set firstname = :firstname, lastname = :lastname, email = :email, gender = :gender, updatedAt= :updatedAt",
+      UpdateExpression: "set firstName = :firstName, lastName = :lastName, email = :email, gender = :gender, updatedAt= :updatedAt",
       ExpressionAttributeValues: {
-          ":firstname": data.firstName || '',
-          ":lastname": data.lastname || '',
+          ":firstName": data.firstName || '',
+          ":lastName": data.lastName || '',
           ":email": data.email || '',
           ":gender": data.gender || '',
           ":updatedAt": timestamp,
